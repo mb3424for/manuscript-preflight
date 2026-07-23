@@ -1,0 +1,25 @@
+name: Weekly SEO monitor
+on:
+  schedule:
+    - cron: '23 13 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install -r requirements.txt
+      - name: Submit sitemap and analyze Search Console
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          SITE_URL: ${{ vars.SEARCH_CONSOLE_PROPERTY }}
+          PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL }}
+        run: python scripts/search_console_monitor.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: weekly-seo-opportunities
+          path: reports/
