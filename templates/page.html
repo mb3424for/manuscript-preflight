@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block content %}
+<main>
+<section class="page-hero"><div class="container"><div class="breadcrumbs"><a href="{{ root }}">Home</a> / {{ page.h1 }}</div><span class="eyebrow">{{ page.eyebrow|default('Manuscript preparation') }}</span><h1>{{ page.h1 }}</h1><p>{{ page.lede }}</p></div></section>
+<article class="prose">{{ content|safe }}</article>
+</main>{% endblock %}
