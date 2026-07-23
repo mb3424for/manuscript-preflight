@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="{{ config.language }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ page.title }}</title>
+  <meta name="description" content="{{ page.description }}">
+  <meta name="robots" content="{{ page.robots|default('index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1') }}">
+  <link rel="canonical" href="{{ canonical }}">
+  <meta property="og:type" content="{{ page.og_type|default('website') }}">
+  <meta property="og:title" content="{{ page.title }}">
+  <meta property="og:description" content="{{ page.description }}">
+  <meta property="og:url" content="{{ canonical }}">
+  <meta property="og:image" content="{{ config.site_url }}/assets/img/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page.title }}">
+  <meta name="twitter:description" content="{{ page.description }}">
+  <link rel="icon" href="{{ root }}assets/img/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ root }}assets/css/styles.css">
+  {% if config.search_console_verification %}<meta name="google-site-verification" content="{{ config.search_console_verification }}">{% endif %}
+  {% if page.date_modified %}<meta name="date" content="{{ page.date_modified }}">{% endif %}
+  {% if jsonld %}<script type="application/ld+json">{{ jsonld|safe }}</script>{% endif %}
+  {% if config.analytics_id %}<script async src="https://www.googletagmanager.com/gtag/js?id={{ config.analytics_id }}"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','{{ config.analytics_id }}');</script>{% endif %}
+</head>
+<body>
+<header class="site-header">
+  <nav class="nav" aria-label="Primary navigation">
+    <a class="brand" href="{{ root }}"><span class="brand-mark">M</span><span>{{ config.site_name }}</span></a>
+    <button class="menu-button" aria-label="Open navigation">Menu</button>
+    <div class="nav-links">
+      <a href="{{ root }}manuscript-checker/">Free checker</a>
+      <a href="{{ root }}journal-submission-checklist/">Checklist</a>
+      <a href="{{ root }}guides/">Guides</a>
+      <a href="{{ root }}pricing/">Pricing</a>
+      <a class="nav-cta" href="{{ root }}manuscript-checker/">Scan a manuscript</a>
+    </div>
+  </nav>
+</header>
+{% block content %}{% endblock %}
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div><a class="brand" href="{{ root }}"><span class="brand-mark">M</span><span>{{ config.site_name }}</span></a><p>Private, systematic pre-submission checks for scholarly DOCX manuscripts.</p></div>
+    <div><strong>Tools and guides</strong><ul class="footer-links"><li><a href="{{ root }}manuscript-checker/">Manuscript checker</a></li><li><a href="{{ root }}citation-reference-checker/">Citation-reference checker</a></li><li><a href="{{ root }}anonymous-manuscript-checker/">Anonymous review checker</a></li><li><a href="{{ root }}journal-submission-checklist/">Submission checklist</a></li></ul></div>
+    <div><strong>Company</strong><ul class="footer-links"><li><a href="{{ root }}about/">About</a></li><li><a href="{{ root }}privacy/">Privacy</a></li><li><a href="{{ root }}pricing/">Pricing</a></li><li><a href="{{ root }}sitemap.xml">Sitemap</a></li></ul></div>
+  </div>
+</footer>
+<script src="{{ root }}assets/js/site.js" defer></script>
+{% block scripts %}{% endblock %}
+</body></html>
